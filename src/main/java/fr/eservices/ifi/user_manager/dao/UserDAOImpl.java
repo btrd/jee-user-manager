@@ -48,14 +48,23 @@ public class UserDAOImpl implements UserDAO {
 		return em.createQuery("SELECT u from user u",User.class).getResultList();
 	}
 
+  // Antoine
 	public List<User> listUserByLastName(String lastname) {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<User> query = em.createQuery("SELECT u from User u WHERE lastname = :lastname", User.class);
+    
+    query.setParameter("lastname", lastname);
+		
+		return query.getResultList();
 	}
 
+  // Antoine
 	public List<User> listUserByRole(String role) {
-		// TODO Auto-generated method stub
-		return null;
+    
+    TypedQuery<Pilote> q = em.createQuery("SELECT u FROM User u WHERE u.role = :role", User.class);
+    
+		q.setParameter("role", role);
+    
+    return q.getResultList();
 	}
 
 }
