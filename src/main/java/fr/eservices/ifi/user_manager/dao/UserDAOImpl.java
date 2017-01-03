@@ -32,22 +32,20 @@ public class UserDAOImpl implements UserDAO {
 
 	// Shijin
 	// pas encore tester / ?role type Role et String
-	public User createUser(String name, String mail, String password, String role) {
+	public User createUser(String firstname, String lastname, String email, String password, String role) {
 		TypedQuery<User> query = em.createQuery(
-				"INSERT INTO user(firstname,email,password,role) values(:name, :mail, :password, :role)", User.class);
-		query.setParameter("name", name).setParameter("mail", mail).setParameter("password", password)
-				.setParameter("role", role);
+				"INSERT INTO user(firstname, lastname, email, password, role) values(:firstname, :lastname, :email, :password, :role)", User.class);
+		query.setParameter("firstname", firstname).setParameter("lastname", lastname).setParameter("email", email).setParameter("password", password).setParameter("role", role);
 		return query.getResultList().get(0);
 	}
 
 	// Shijin
-	// pas encore tester / ?role type Role et String / ?update user by mail ou by id
-	public User updateUser(String name, String mail, String password, String role) {
+	// pas encore tester / ?role type Role et String / ?update user by email ou by id
+	public User updateUser(Long userId, String firstname, String lastname, String email, String password, String role) {
 		TypedQuery<User> query = em.createQuery(
-				"UPDATE user SET firstname = :name, password = :password, role = :role WHERE email = :mail",
+				"UPDATE user SET firstname = :firstname, lastname = :lastname, password = :password, role = :role WHERE email = :email WHERE id = :id",
 				User.class);
-		query.setParameter("name", name).setParameter("mail", mail).setParameter("password", password)
-				.setParameter("role", role);
+		query.setParameter("firstname", firstname).setParameter("lastname", lastname).setParameter("email", email).setParameter("password", password).setParameter("role", role);
 		return query.getResultList().get(0);
 	}
 

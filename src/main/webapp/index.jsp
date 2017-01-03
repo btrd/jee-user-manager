@@ -7,7 +7,7 @@
 </head>
 <body>
   <div class="container">
-    <a class="btn btn-lg btn-primary btn-block" href="">Login</a>
+    <a class="btn btn-lg btn-primary btn-block" href="login.jsp">Login</a>
   </div>
   <script src="bootstrap/js/bootstrap.js" type="text/javascript"></script>
 </body>

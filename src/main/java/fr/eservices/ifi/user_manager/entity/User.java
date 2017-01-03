@@ -24,14 +24,6 @@ public class User {
 	}
 
 	// Shijin
-	public User(String firstname, String email, String password, Role role) {
-		this.firstname = firstname;
-		this.email = email;
-		this.password = password;
-		this.role = role;
-	}
-
-	// Shijin
 	public User(String firstname, String lastname, String email, String password, Role role) {
 		this.firstname = firstname;
 		this.lastname = lastname;
