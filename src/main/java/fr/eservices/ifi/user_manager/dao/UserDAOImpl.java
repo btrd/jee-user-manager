@@ -71,6 +71,16 @@ public class UserDAOImpl implements UserDAO {
 
 		return query.getResultList();
 	}
+  
+  // Antoine
+  public List<User> retrieveUserByAuth(String email, String password) {
+		TypedQuery<User> query = em.createQuery("SELECT u from User u WHERE email=:lastname AND password=:password", User.class);
+
+		query.setParameter("email", email);
+    query.setParameter("password", password);
+
+		return query.getResultList();
+	}
 
 	// Antoine
 	public List<User> listUserByRole(String role) {

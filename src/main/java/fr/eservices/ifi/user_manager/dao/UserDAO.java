@@ -15,6 +15,8 @@ public interface UserDAO {
 	public List<User> listUser();
 
 	public List<User> listUserByLastName(String lastname);
+  
+  public List<User> retrieveUserByAuth(String email, String password);
 
 	public List<User> listUserByRole(String role);
 
