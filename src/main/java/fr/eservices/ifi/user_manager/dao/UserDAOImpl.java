@@ -79,7 +79,7 @@ public class UserDAOImpl implements UserDAO {
 	// Antoine
 	public List<User> listUserByRole(String role) {
 
-		TypedQuery<Pilote> q = em.createQuery("SELECT u FROM User u WHERE u.role = :role", User.class);
+		TypedQuery<User> q = em.createQuery("SELECT u FROM User u WHERE u.role = :role", User.class);
 
 		q.setParameter("role", role);
 
