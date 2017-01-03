@@ -4,14 +4,14 @@ import java.util.List;
 
 import fr.eservices.ifi.user_manager.entity.User;
 
-public interface ResellerService {
+public interface UserService {
   
   // Pass SESSION/COOKIES/SOMETHING in params
   public User getAuthenticatedUser();
 
   public String getLoginPageUrl();
 
-  public void create(User user);
+  public User create(String firstname, String lastname, String email, String password, String role);
 
   public User update(Long id, String firstname, String lastname, String email, String password, String role);
 
