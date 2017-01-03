@@ -41,7 +41,7 @@ public class UserDAOImpl implements UserDAO {
 
 	// Shijin
 	// pas encore tester / ?role type Role et String / ?update user by email ou by id
-	public User updateUser(Long userId, String firstname, String lastname, String email, String password, String role) {
+	public User updateUser(Long id, String firstname, String lastname, String email, String password, String role) {
 		TypedQuery<User> query = em.createQuery(
 				"UPDATE user SET firstname = :firstname, lastname = :lastname, password = :password, role = :role WHERE email = :email WHERE id = :id",
 				User.class);
@@ -51,14 +51,12 @@ public class UserDAOImpl implements UserDAO {
 
 	// Shijin
 	// pas encore tester
-	public boolean deleteUser(Long userId) {
-		List<User> user = em.createQuery("SELECT u FROM user u WHERE id = :userId", User.class)
-				.setParameter("userId", userId).getResultList();
-		if (user.size() == 0)
-			return false;
-
-		em.createQuery("DELETE FROM user u WHERE id = :userId", User.class).setParameter("userId", userId);
-		return true;
+	public boolean deleteUser(Long id) {
+		int count = em
+			.createQuery("DELETE FROM user where id = :id")
+			.setParameter("id", id)
+			.executeUpdate();
+		return count == 1;
 	}
 
 	public List<User> listUser() {

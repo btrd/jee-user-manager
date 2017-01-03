@@ -13,9 +13,9 @@ public interface ResellerService {
 
   public void create(User user);
 
-  public User update(Long userId, String firstname, String lastname, String email, String password, String role);
+  public User update(Long id, String firstname, String lastname, String email, String password, String role);
 
-  public boolean delete(Long userId);
+  public boolean delete(Long id);
 
   public List<User> list();
 
