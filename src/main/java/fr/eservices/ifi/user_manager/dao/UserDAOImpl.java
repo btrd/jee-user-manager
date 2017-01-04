@@ -20,7 +20,7 @@ public class UserDAOImpl implements UserDAO {
 	EntityTransaction tx;
 
 	public UserDAOImpl() {
-		emf = Persistence.createEntityManagerFactory("user-manager");
+		emf = Persistence.createEntityManagerFactory("userManager");
 		em = emf.createEntityManager();
 		tx = em.getTransaction();
 	}
