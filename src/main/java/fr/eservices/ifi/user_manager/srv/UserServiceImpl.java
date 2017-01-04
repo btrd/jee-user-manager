@@ -5,14 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import fr.eservices.ifi.user_manager.dao.UserDAO;
+import fr.eservices.ifi.user_manager.dao.UserDAOImpl;
 import fr.eservices.ifi.user_manager.entity.User;
 
 @Component
 public class UserServiceImpl implements UserService {
   
   @Autowired
-  UserDAO dao;
+  UserDAOImpl dao;
   
   @Override
   public User getAuthenticatedUser() {
