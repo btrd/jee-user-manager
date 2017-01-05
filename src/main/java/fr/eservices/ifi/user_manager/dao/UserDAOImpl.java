@@ -33,11 +33,15 @@ public class UserDAOImpl implements UserDAO {
 	// Shijin
 	// pas encore tester / ?role type Role et String
 	/*
+	@Transactional
 	public User createUser(String firstname, String lastname, String email, String password, String role) {
 		TypedQuery<User> query = em.createQuery(
 				"INSERT INTO User VALUES(:firstname, :lastname, :email, :password, :role)", User.class);
+		
+		Query query = em.createNativeQuery("INSERT INTO User(firstname, lastname, email, password, role) VALUES(:firstname, :lastname, :email, :password, :role)", User.class);
 		query.setParameter("firstname", firstname).setParameter("lastname", lastname).setParameter("email", email).setParameter("password", password).setParameter("role", role);
-		return query.getResultList().get(0);
+		query.executeUpdate();
+		return new User();
 	}
 	*/
 	
