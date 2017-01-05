@@ -144,3 +144,6 @@ hs_err_pid*
 
 # for mac users
 .DS_Store
+
+db.trace.db
+

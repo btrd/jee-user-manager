@@ -15,9 +15,14 @@ public class UserController {
 	@Autowired
 	UserServiceImpl userSrv;
 	
-	@RequestMapping(value="/listAll", method=RequestMethod.GET)
-	public String listAll(Model model){
-		model.addAttribute("listUser", userSrv.list());
-		return "list";
-	}
+  @RequestMapping(value="/index", method=RequestMethod.GET)
+  public String index(){
+    return "index";
+  }
+
+  @RequestMapping(value="/list", method=RequestMethod.GET)
+  public String listAll(Model model){
+    model.addAttribute("listUser", userSrv.list());
+    return "list";
+  }
 }

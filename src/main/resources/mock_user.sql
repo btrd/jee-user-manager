@@ -1,2 +1,2 @@
 delete from user;
-insert into user('lastname', 'firstname', 'email', 'password', 'role') values ('toto', 'toto', 'toto', 'toto@toto.toto', 'toto');
+insert into user('firstname', 'lastname', 'email', 'password', 'role') values ('Jean', 'Bertrand', 'jean@bertrand.me', 'jeanbertrand', 'ADMIN');
