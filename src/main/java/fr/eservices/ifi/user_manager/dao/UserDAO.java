@@ -6,8 +6,10 @@ import fr.eservices.ifi.user_manager.entity.User;
 
 public interface UserDAO {
 
-	public User createUser(String firstname, String lastname, String email, String password, String role);
+	//public User createUser(String firstname, String lastname, String email, String password, String role);
 
+	public User createUser(User user);
+	
 	public User updateUser(Long id, String firstname, String lastname, String email, String password, String role);
 
 	public boolean deleteUser(Long id);

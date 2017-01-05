@@ -11,8 +11,10 @@ public interface UserService {
 
   public String getLoginPageUrl();
 
-  public User create(String firstname, String lastname, String email, String password, String role);
+  //public User create(String firstname, String lastname, String email, String password, String role);
 
+  public User create(User user);
+  
   public User update(Long id, String firstname, String lastname, String email, String password, String role);
 
   public boolean delete(Long id);

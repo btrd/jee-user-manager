@@ -6,9 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import fr.eservices.ifi.user_manager.dao.UserDAO;
 import fr.eservices.ifi.user_manager.dao.UserDAOImpl;
 import fr.eservices.ifi.user_manager.entity.User;
+
 import java.util.List;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
@@ -16,7 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 public class UserController {
 
   @Autowired
-  private UserDAOImpl userDao;
+  private UserDAO userDao;
 	
   @RequestMapping(value="/index", method=RequestMethod.GET)
   public String index(){
@@ -58,8 +61,7 @@ public class UserController {
   
   @RequestMapping(value="/register", method=RequestMethod.POST)
   public String registerForm(@ModelAttribute User user) {
-    userDao.createUser(user.getFirstname(), user.getLastname(), user.getEmail(), user.getPassword(), "RIGGER");
-    
+    userDao.createUser(user);
     return "index";
   }
 }

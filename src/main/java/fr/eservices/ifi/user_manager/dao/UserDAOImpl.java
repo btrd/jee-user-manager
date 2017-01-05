@@ -3,13 +3,11 @@ package fr.eservices.ifi.user_manager.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Entity;
+import javax.persistence.TypedQuery;
+
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.eservices.ifi.user_manager.entity.User;
 
@@ -34,13 +32,15 @@ public class UserDAOImpl implements UserDAO {
 
 	// Shijin
 	// pas encore tester / ?role type Role et String
+	/*
 	public User createUser(String firstname, String lastname, String email, String password, String role) {
 		TypedQuery<User> query = em.createQuery(
 				"INSERT INTO User VALUES(:firstname, :lastname, :email, :password, :role)", User.class);
 		query.setParameter("firstname", firstname).setParameter("lastname", lastname).setParameter("email", email).setParameter("password", password).setParameter("role", role);
 		return query.getResultList().get(0);
 	}
-
+	*/
+	
 	// Shijin
 	// pas encore tester / ?role type Role et String / ?update user by email ou by id
 	public User updateUser(Long id, String firstname, String lastname, String email, String password, String role) {
@@ -92,6 +92,17 @@ public class UserDAOImpl implements UserDAO {
 		q.setParameter("role", role);
 
 		return q.getResultList();
+	}
+
+	@Transactional
+	public User createUser(User user) {
+		if(!em.contains(user)){
+			em.persist(user);
+			em.flush();
+			return user;		
+		}else{
+			return null;
+		}		
 	}
 
 }
