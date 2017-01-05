@@ -62,6 +62,7 @@ public class AppConfig {
     prop.setProperty("hibernate.show_sql", "true");
     prop.setProperty("hibernate.hbm2ddl.auto", "create-drop");
     prop.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+    prop.setProperty("javax.persistence.sql-load-script-source", "mock_user.sql");
     em.setJpaProperties(prop);
 
     return em;

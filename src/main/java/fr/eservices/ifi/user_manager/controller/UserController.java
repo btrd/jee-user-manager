@@ -20,6 +20,7 @@ public class UserController {
 	
   @RequestMapping(value="/index", method=RequestMethod.GET)
   public String index(){
+    // userDao.createUser("Jean", "Bertrand", "jean@bertrand.me", "password", "ADMIN");
     return "index";
   }
 

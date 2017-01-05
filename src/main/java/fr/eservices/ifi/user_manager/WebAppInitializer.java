@@ -9,10 +9,9 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
-public class WebAppInitializer implements WebApplicationInitializer 
-{
+public class WebAppInitializer implements WebApplicationInitializer {
 
-	public void onStartup(ServletContext container) throws ServletException {	      
+	public void onStartup(ServletContext container) throws ServletException { 
 		AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
 		dispatcherContext.register(AppConfig.class);
 		container.addListener( new ContextLoaderListener(dispatcherContext) );
@@ -20,5 +19,4 @@ public class WebAppInitializer implements WebApplicationInitializer
 		dispatcher.setLoadOnStartup(1);
 		dispatcher.addMapping("/app/*");
 	}
-
 }
