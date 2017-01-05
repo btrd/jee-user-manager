@@ -14,16 +14,10 @@ public class UserServiceImpl implements UserService {
   @Autowired
   UserDAOImpl dao;
   
-  @Autowired
-  Session session;
-  
   @Override
-  public Session getAuthenticatedUser() {
-    if(session) {
-      return session;
-    } else {
-      return null;
-    }
+  public User getAuthenticatedUser() {
+    
+    return null;
   }
 
   @Override

@@ -38,6 +38,8 @@ public class UserController {
   
   @RequestMapping(value="/login", method=RequestMethod.POST)
   public String loginSubmit(@ModelAttribute User user) {
+    System.out.println(user.getEmail());
+    System.out.println(user.getPassword());
     List<User> retrieveduser = userDao.retrieveUserByAuth(user.getEmail(), user.getPassword());
     
     if(retrieveduser.size() != 1) {
