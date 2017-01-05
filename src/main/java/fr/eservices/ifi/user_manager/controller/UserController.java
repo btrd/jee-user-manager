@@ -6,14 +6,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import fr.eservices.ifi.user_manager.srv.UserServiceImpl;
+import fr.eservices.ifi.user_manager.dao.UserDAOImpl;
+import fr.eservices.ifi.user_manager.entity.User;
+import java.util.List;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
-	@Autowired
-	UserServiceImpl userSrv;
+  @Autowired
+  private UserDAOImpl userDao;
 	
   @RequestMapping(value="/index", method=RequestMethod.GET)
   public String index(){
@@ -22,7 +25,25 @@ public class UserController {
 
   @RequestMapping(value="/list", method=RequestMethod.GET)
   public String listAll(Model model){
-    model.addAttribute("listUser", userSrv.list());
+    model.addAttribute("listUser", userDao.listUser());
     return "list";
+  }
+
+  @RequestMapping(value="/login", method=RequestMethod.GET)
+  public String initPage(Model model) {
+    model.addAttribute("user", new User());
+    return "login";
+  }
+  
+  @RequestMapping(value="/login", method=RequestMethod.POST)
+  public String loginSubmit(@ModelAttribute User user) {
+    List<User> retrieveduser = userDao.retrieveUserByAuth(user.getEmail(), user.getPassword());
+    
+    if(retrieveduser.size() != 1) {
+      // model.addAttribute("error", "Mauvaise connexion");
+      return "login";
+    }
+    
+    return "index";
   }
 }
