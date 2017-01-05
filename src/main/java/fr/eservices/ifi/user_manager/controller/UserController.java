@@ -47,4 +47,17 @@ public class UserController {
     
     return "index";
   }
+  
+  @RequestMapping(value="/register", method=RequestMethod.GET)
+  public String initRegisterPage(Model model) {
+    model.addAttribute("user", new User());
+    return "register";
+  }
+  
+  @RequestMapping(value="/register", method=RequestMethod.POST)
+  public String registerForm(@ModelAttribute User user) {
+    userDao.createUser(user.getFirstname(), user.getLastname(), user.getEmail(), user.getPassword(), "RIGGER");
+    
+    return "index";
+  }
 }

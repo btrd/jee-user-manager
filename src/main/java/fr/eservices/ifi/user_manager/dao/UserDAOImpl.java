@@ -36,7 +36,7 @@ public class UserDAOImpl implements UserDAO {
 	// pas encore tester / ?role type Role et String
 	public User createUser(String firstname, String lastname, String email, String password, String role) {
 		TypedQuery<User> query = em.createQuery(
-				"INSERT INTO User(firstname, lastname, email, password, role) values(:firstname, :lastname, :email, :password, :role)", User.class);
+				"INSERT INTO User VALUES(:firstname, :lastname, :email, :password, :role)", User.class);
 		query.setParameter("firstname", firstname).setParameter("lastname", lastname).setParameter("email", email).setParameter("password", password).setParameter("role", role);
 		return query.getResultList().get(0);
 	}
@@ -47,7 +47,7 @@ public class UserDAOImpl implements UserDAO {
 		TypedQuery<User> query = em.createQuery(
 				"UPDATE User SET firstname = :firstname, lastname = :lastname, password = :password, role = :role WHERE email = :email WHERE id = :id",
 				User.class);
-		query.setParameter("firstname", firstname).setParameter("lastname", lastname).setParameter("email", email).setParameter("password", password).setParameter("role", role);
+		query.setParameter("firstname", firstname).setParameter("lastname", lastname).setParameter("email", email).setParameter("password", password).setParameter("role", 1);
 		return query.getResultList().get(0);
 	}
 
