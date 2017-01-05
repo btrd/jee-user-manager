@@ -26,22 +26,26 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableTransactionManagement
 public class AppConfig {
   
-  /*
+  // @Override
+  // public void addResourceHandlers(ResourceHandlerRegistry registry) {
+  //   registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+  // }
+
   @Bean
   public InternalResourceViewResolver getViewResolver() {
     InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-    resolver.setPrefix("META-INF/resources/WEB-INF/views/");
+    resolver.setPrefix("/WEB-INF/views/");
     resolver.setSuffix(".jsp");
     return resolver;
   }
-  */
-  @Bean
-  public InternalResourceViewResolver jspViewResolver() {
-    InternalResourceViewResolver bean = new InternalResourceViewResolver();
-    bean.setPrefix("/WEB-INF/views/");
-    bean.setSuffix(".jsp");
-    return bean;
-  }
+  
+  // @Bean
+  // public InternalResourceViewResolver jspViewResolver() {
+  //   InternalResourceViewResolver bean = new InternalResourceViewResolver();
+  //   bean.setPrefix("/WEB-INF/views/");
+  //   bean.setSuffix(".jsp");
+  //   return bean;
+  // }
 
   @Bean
   public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
@@ -77,8 +81,4 @@ public class AppConfig {
     transactionManager.setEntityManagerFactory(emf);
     return transactionManager;
   }
-  
-
-
-
 }
