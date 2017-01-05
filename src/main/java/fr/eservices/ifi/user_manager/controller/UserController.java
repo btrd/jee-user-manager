@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import fr.eservices.ifi.user_manager.dao.UserDAO;
 import fr.eservices.ifi.user_manager.dao.UserDAOImpl;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import fr.eservices.ifi.user_manager.entity.User;
 
 import java.util.List;
@@ -23,13 +25,18 @@ public class UserController {
 	
   @RequestMapping(value="/index", method=RequestMethod.GET)
   public String index(){
-    // userDao.createUser("Jean", "Bertrand", "jean@bertrand.me", "password", "ADMIN");
     return "index";
   }
 
   @RequestMapping(value="/list", method=RequestMethod.GET)
-  public String listAll(Model model){
-    model.addAttribute("listUser", userDao.listUser());
+  public String listAll(Model model, @RequestParam(value="name", required=false) String name,  @RequestParam(value="role", required=false) String role) {
+    if(role != null && !role.isEmpty()) {
+      model.addAttribute("listUser", userDao.listUserByRole(role));
+    } else if(name != null && !name.isEmpty()) {
+      model.addAttribute("listUser", userDao.listUserByLastName(name));
+    } else {
+      model.addAttribute("listUser", userDao.listUser());
+    }
     return "list";
   }
 
@@ -41,11 +48,8 @@ public class UserController {
   
   @RequestMapping(value="/login", method=RequestMethod.POST)
   public String loginSubmit(@ModelAttribute User user) {
-    System.out.println(user.getEmail());
-    System.out.println(user.getPassword());
-    List<User> retrieveduser = userDao.retrieveUserByAuth(user.getEmail(), user.getPassword());
-    
-    if(retrieveduser.size() != 1) {
+    List<User> retrievedUser = userDao.retrieveUserByAuth(user.getEmail(), user.getPassword());
+    if(retrievedUser.size() != 1) {
       // model.addAttribute("error", "Mauvaise connexion");
       return "login";
     }
