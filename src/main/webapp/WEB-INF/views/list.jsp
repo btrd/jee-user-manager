@@ -31,13 +31,12 @@
       </form>
       <hr/>
       <table class="table table-striped table-hover">
-      	<tr><th>Firstname</th><th>Lastname</th><th>Email</th><th>Password</th><th>Role</th><th>Edit</th><th>Delete</th></tr>
+      	<tr><th>Firstname</th><th>Lastname</th><th>Email</th><th>Role</th><th>Edit</th><th>Delete</th></tr>
       	<c:forEach items="${listUser}" var="listUser">
       	<tr>
     	  <td><c:out value="${listUser.firstname}"/></td>
     	  <td><c:out value="${listUser.lastname}"/></td>
           <td><c:out value="${listUser.email}"/></td>
-          <td><c:out value="${listUser.password}"/></td>
           <td><c:out value="${listUser.role}"/></td>
           <td><a href="./edit?id=${listUser.id}"><button class="btn warning">Edit</button></a></td>
           <td><a href="./delete?id=${listUser.id}"><button class="btn btn-danger">Delete</button></a></td>

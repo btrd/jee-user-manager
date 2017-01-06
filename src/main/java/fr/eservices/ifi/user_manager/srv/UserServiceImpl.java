@@ -24,7 +24,11 @@ public class UserServiceImpl implements UserService {
 		if (cookies != null) {
 			for (int i = 0; i < cookies.length; i++) {
 				if (cookies[i].getName().equals("user_id")) {
-					user_id = Long.parseLong(cookies[i].getValue());
+					try {
+						user_id = Long.parseLong(cookies[i].getValue());
+					} catch(NumberFormatException e) {
+						break;
+					}
 					break;
 				}
 			}

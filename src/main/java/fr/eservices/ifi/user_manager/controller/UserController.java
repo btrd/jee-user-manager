@@ -27,7 +27,7 @@ public class UserController {
 	@Autowired
 	private UserServiceImpl userService;
 
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
 	public String index(HttpServletRequest req) {
 		User user = userService.getAuthenticatedUser(req);
 		if (user != null) {
