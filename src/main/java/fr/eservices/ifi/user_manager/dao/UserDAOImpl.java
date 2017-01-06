@@ -88,6 +88,18 @@ public class UserDAOImpl implements UserDAO {
 		return query.getResultList();
 	}
 
+  public User retrieveUserById(Long id) {
+		TypedQuery<User> query = em.createQuery("SELECT u from User u WHERE id=:id", User.class);
+		query.setParameter("id", id);
+		List<User> result = query.getResultList();
+    if(result.size() == 1) {
+      // model.addAttribute("error", "Mauvaise connexion");
+      return result.get(0);
+    } else {
+    	return null;
+    }
+	}
+
 	// Antoine
 	public List<User> listUserByRole(String role) {
 

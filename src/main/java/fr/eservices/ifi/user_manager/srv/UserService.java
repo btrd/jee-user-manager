@@ -2,12 +2,14 @@ package fr.eservices.ifi.user_manager.srv;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import fr.eservices.ifi.user_manager.entity.User;
 
 public interface UserService {
   
   // Pass SESSION/COOKIES/SOMETHING in params
-  public User getAuthenticatedUser();
+  public User getAuthenticatedUser(HttpServletRequest req);
 
   public String getLoginPageUrl();
 
