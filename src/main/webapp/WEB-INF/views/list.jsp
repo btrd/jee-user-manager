@@ -1,17 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link href="../../resources/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="../../resources/style.css" rel="stylesheet" type="text/css">
     <title>Users List</title>
-
   </head>
   <body>
-
     <div class="container">
       <a href="./login"><button class="btn btn-danger">Disconnect</button></a>
 
@@ -47,7 +42,5 @@
       </table>
       <a href="./register"><button class="btn btn-primary">Create User</button></a>
 	</div>
-
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </body>
 </html>

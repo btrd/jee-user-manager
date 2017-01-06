@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Register</title>
-    <link href="../../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="../../resources/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="../../resources/style.css" rel="stylesheet" type="text/css">
   </head>
   <body>
@@ -20,10 +20,11 @@
         <label for="role" class="sr-only" name="role">Role</label>
         <select id="role" class="form-control" required name="role">
           <option value="ADMIN">Admin</option>
-          <option value="SUPERVISOR">Superviseur</option>
-          <option value="RIGGER">Plieur</option>
+          <option value="SUPERVISOR">Supervisor</option>
+          <option value="RIGGER">Rigger</option>
         </select> 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+        <a href="./list" class="btn btn-lg btn-danger btn-block">Cancel</a>
       </form>
     </div>
   </body>

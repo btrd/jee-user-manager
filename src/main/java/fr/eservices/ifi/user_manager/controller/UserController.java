@@ -28,9 +28,10 @@ public class UserController {
 	private UserServiceImpl userService;
 
 	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
-	public String index(HttpServletRequest req) {
+	public String index(Model model, HttpServletRequest req) {
 		User user = userService.getAuthenticatedUser(req.getSession());
 		if (user != null) {
+			model.addAttribute("user", user);
 			return "index";
 		} else {
 			return "redirect:login";

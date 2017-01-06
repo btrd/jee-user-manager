@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Sign In</title>
-    <link href="../../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="../../resources/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="../../resources/style.css" rel="stylesheet" type="text/css">
   </head>
   <body>
