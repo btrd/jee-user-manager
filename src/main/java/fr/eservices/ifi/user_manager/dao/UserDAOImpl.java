@@ -45,14 +45,25 @@ public class UserDAOImpl implements UserDAO {
 	}
 	*/
 	
+	public User find(Long id){
+		return em.find(User.class,id);
+	}
+	
 	// Shijin
 	// pas encore tester / ?role type Role et String / ?update user by email ou by id
-	public User updateUser(Long id, String firstname, String lastname, String email, String password, String role) {
-		TypedQuery<User> query = em.createQuery(
-				"UPDATE User SET firstname = :firstname, lastname = :lastname, password = :password, role = :role WHERE email = :email WHERE id = :id",
-				User.class);
-		query.setParameter("firstname", firstname).setParameter("lastname", lastname).setParameter("email", email).setParameter("password", password).setParameter("role", 1);
-		return query.getResultList().get(0);
+	@Transactional
+	public User updateUser(User user) {
+		System.out.println(user.getId());
+		int userUpdate = em.createQuery(
+				"UPDATE User SET firstname = :firstname, lastname = :lastname, password = :password, role = :role, email = :email WHERE id = :id")
+				.setParameter("firstname", user.getFirstname())
+				.setParameter("lastname", user.getLastname())
+				.setParameter("email", user.getEmail())
+				.setParameter("password", user.getPassword())
+				.setParameter("role", user.getRole())
+				.setParameter("id", user.getId())
+				.executeUpdate();
+		return userUpdate == 1 ? user : null;
 	}
 
 	// Shijin

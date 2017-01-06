@@ -10,9 +10,11 @@ public interface UserDAO {
 
 	public User createUser(User user);
 	
-	public User updateUser(Long id, String firstname, String lastname, String email, String password, String role);
+	public User updateUser(User user);
 
 	public boolean deleteUser(Long id);
+	
+	public User find(Long id);
 
 	public List<User> listUser();
 
