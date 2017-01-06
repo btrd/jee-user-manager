@@ -32,7 +32,7 @@
       </form>
       <hr/>
       <table class="table table-striped table-hover">
-      	<tr><th>Firstname</th><th>Lastname</th><th>email</th><th>password</th><th>role</th></tr>
+      	<tr><th>Firstname</th><th>Lastname</th><th>email</th><th>password</th><th>role</th><th>edit</th></tr>
       	<c:forEach items="${listUser}" var="listUser">
       	<tr>
       		<td><c:out value="${listUser.firstname}"/></td>
@@ -40,6 +40,7 @@
           <td><c:out value="${listUser.email}"/></td>
           <td><c:out value="${listUser.password}"/></td>
           <td><c:out value="${listUser.role}"/></td>
+          <td><a href="./edit?id=${listUser.id}">Edit</a></td>
       	</tr>
       	</c:forEach>
       </table>
