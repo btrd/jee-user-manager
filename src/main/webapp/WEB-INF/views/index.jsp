@@ -8,6 +8,7 @@
 <body>
   <div class="container">
     <h1>Congratulation you're connected</h1>
+    <a href="./login"><button class="btn btn-danger">Disconnect</button></a>
   </div>
 </body>
 </html>
