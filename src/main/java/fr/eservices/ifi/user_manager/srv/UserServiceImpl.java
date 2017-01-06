@@ -29,13 +29,16 @@ public class UserServiceImpl implements UserService {
 				}
 			}
 		}
-
-		return dao.find(user_id);
+		if(user_id != null && user_id instanceof Long) {
+			return dao.find(user_id);
+		} else {
+			return null;
+		}
 	}
 
 	@Override
 	public String getLoginPageUrl() {
-		return "/user/login";
+		return "/user-manager/app/user/login";
 	}
 
 	@Override

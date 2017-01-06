@@ -23,7 +23,6 @@ public class UserDAOImpl implements UserDAO {
 
 	@Transactional
 	public User updateUser(User user) {
-		System.out.println(user.getId());
 		int userUpdate = em
 				.createQuery(
 						"UPDATE User SET firstname = :firstname, lastname = :lastname, password = :password, role = :role, email = :email WHERE id = :id")
