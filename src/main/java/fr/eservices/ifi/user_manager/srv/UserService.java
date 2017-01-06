@@ -2,12 +2,12 @@ package fr.eservices.ifi.user_manager.srv;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import fr.eservices.ifi.user_manager.entity.User;
 
 public interface UserService {
-	public User getAuthenticatedUser(HttpServletRequest req);
+	public User getAuthenticatedUser(HttpSession sess);
 
 	public String getLoginPageUrl();
 

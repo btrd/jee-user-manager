@@ -3,7 +3,7 @@ package fr.eservices.ifi.user_manager.srv;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,21 +18,8 @@ public class UserServiceImpl implements UserService {
 	UserDAO dao;
 
 	@Override
-	public User getAuthenticatedUser(HttpServletRequest req) {
-		Long user_id = null;
-		Cookie[] cookies = req.getCookies();
-		if (cookies != null) {
-			for (int i = 0; i < cookies.length; i++) {
-				if (cookies[i].getName().equals("user_id")) {
-					try {
-						user_id = Long.parseLong(cookies[i].getValue());
-					} catch(NumberFormatException e) {
-						break;
-					}
-					break;
-				}
-			}
-		}
+	public User getAuthenticatedUser(HttpSession sess) {
+    Long user_id = (Long) sess.getAttribute("user_id");
 		if(user_id != null && user_id instanceof Long) {
 			return dao.find(user_id);
 		} else {

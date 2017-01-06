@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpSession;
 
 import fr.eservices.ifi.user_manager.dao.UserDAO;
 import fr.eservices.ifi.user_manager.entity.User;
@@ -29,7 +29,7 @@ public class UserController {
 
 	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
 	public String index(HttpServletRequest req) {
-		User user = userService.getAuthenticatedUser(req);
+		User user = userService.getAuthenticatedUser(req.getSession());
 		if (user != null) {
 			return "index";
 		} else {
@@ -40,7 +40,7 @@ public class UserController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String listAll(Model model, @RequestParam(value = "name", required = false) String name,
 			@RequestParam(value = "role", required = false) String role, HttpServletRequest req) {
-		User user = userService.getAuthenticatedUser(req);
+		User user = userService.getAuthenticatedUser(req.getSession());
 		if (user != null && user.getRole().equals("ADMIN")) {
 			if (role != null && !role.isEmpty()) {
 				model.addAttribute("listUser", userDao.listUserByRole(role));
@@ -58,20 +58,23 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String initPage(Model model) {
+	public String initPage(Model model, HttpServletResponse res, HttpServletRequest req) {
+    HttpSession session = req.getSession();
+    session.invalidate();
+
 		model.addAttribute("user", new User());
 		return "login";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String loginSubmit(@ModelAttribute User user, HttpServletResponse res) {
+	public String loginSubmit(@ModelAttribute User user, HttpServletResponse res, HttpServletRequest req) {
 		List<User> retrievedUser = userDao.retrieveUserByAuth(user.getEmail(), user.getPassword());
 
 		if (retrievedUser.size() != 1) {
 			return "login";
 		}
-		Cookie c = new Cookie("user_id", String.valueOf(retrievedUser.get(0).getId()));
-		res.addCookie(c);
+		HttpSession session = req.getSession();
+		session.setAttribute("user_id", retrievedUser.get(0).getId());
 		if (retrievedUser.get(0).getRole().equals("ADMIN")) {
 			return "redirect:list";
 		} else {
@@ -81,7 +84,7 @@ public class UserController {
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String initRegisterPage(Model model, HttpServletRequest req) {
-		User user = userService.getAuthenticatedUser(req);
+		User user = userService.getAuthenticatedUser(req.getSession());
 		if (user != null && user.getRole().equals("ADMIN")) {
 			model.addAttribute("user", new User());
 			return "register";
@@ -94,7 +97,7 @@ public class UserController {
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String registerForm(@ModelAttribute User user, HttpServletRequest req) {
-		User user2 = userService.getAuthenticatedUser(req);
+		User user2 = userService.getAuthenticatedUser(req.getSession());
 		if (user2 != null && user2.getRole().equals("ADMIN")) {
 			userDao.createUser(user);
 			return "redirect:list";
