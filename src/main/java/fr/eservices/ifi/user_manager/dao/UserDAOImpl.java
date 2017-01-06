@@ -68,12 +68,19 @@ public class UserDAOImpl implements UserDAO {
 
 	// Shijin
 	// pas encore tester
+	@Transactional
 	public boolean deleteUser(Long id) {
-		int count = em
+		/*int count = em
 			.createQuery("DELETE FROM User where id = :id")
 			.setParameter("id", id)
 			.executeUpdate();
-		return count == 1;
+		return count == 1;*/
+		User user = this.find(id);
+		if(user!=null){
+			em.remove(user);
+			return true;
+		}
+		return false;
 	}
 
 	public List<User> listUser() {

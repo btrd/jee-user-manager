@@ -1,4 +1,3 @@
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,15 +34,19 @@
       	<tr><th>Firstname</th><th>Lastname</th><th>email</th><th>password</th><th>role</th><th>edit</th></tr>
       	<c:forEach items="${listUser}" var="listUser">
       	<tr>
-      		<td><c:out value="${listUser.firstname}"/></td>
-      		<td><c:out value="${listUser.lastname}"/></td>
+    	  <td><c:out value="${listUser.firstname}"/></td>
+    	  <td><c:out value="${listUser.lastname}"/></td>
           <td><c:out value="${listUser.email}"/></td>
           <td><c:out value="${listUser.password}"/></td>
           <td><c:out value="${listUser.role}"/></td>
-          <td><a href="./edit?id=${listUser.id}">Edit</a></td>
+          <td><a href="./edit?id=${listUser.id}"><button class="btn warning">Edit</button></a></td>
+          <td><a href="./delete?id=${listUser.id}"><button class="btn btn-danger">Delete</button></a></td>
       	</tr>
       	</c:forEach>
       </table>
+      <a href="./register"><button class="btn btn-primary">Create</button></a>
 	</div>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </body>
 </html>

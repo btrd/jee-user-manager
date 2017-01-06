@@ -1,25 +1,21 @@
 package fr.eservices.ifi.user_manager.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.eservices.ifi.user_manager.dao.UserDAO;
 import fr.eservices.ifi.user_manager.entity.User;
 import fr.eservices.ifi.user_manager.srv.UserServiceImpl;
-
-import java.util.List;
-
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
 @RequestMapping("/user")
@@ -37,7 +33,7 @@ public class UserController {
     if(user != null) {
       return "index";
     } else {
-      return "login";
+      return "redirect:login";
     }
   }
 
@@ -54,9 +50,9 @@ public class UserController {
       }
       return "list";
     } else if(user != null) {
-      return "index";
+      return "redirect:index";
     } else {
-      return "login";
+      return "redirect:login";
     }
   }
 
@@ -76,9 +72,9 @@ public class UserController {
     Cookie c = new Cookie("user_id", String.valueOf(retrievedUser.get(0).getId()));
     res.addCookie(c);
     if(retrievedUser.get(0).getRole().equals("ADMIN")) {
-      return "list";
+      return "redirect:list";
     } else {
-      return "index";
+      return "redirect:index";
     }
   }
   
@@ -89,9 +85,9 @@ public class UserController {
       model.addAttribute("user", new User());
       return "register";
     } else if(user != null) {
-      return "index";
+      return "redirect:index";
     } else {
-      return "login";
+      return "redirect:login";
     }
   }
   
@@ -100,11 +96,11 @@ public class UserController {
     User user2 = userService.getAuthenticatedUser(req);
     if(user2 != null && user2.getRole().equals("ADMIN")) {
       userDao.createUser(user);
-      return "list";
+      return "redirect:list";
     } else if(user2 != null) {
-      return "index";
+      return "redirect:index";
     } else {
-      return "login";
+      return "redirect:login";
     }
   }
   
@@ -118,6 +114,12 @@ public class UserController {
   public String updateForm(@ModelAttribute User user){
 	System.out.println(user.getFirstname());
     userDao.updateUser(user);
-    return "index";
+    return "redirect:list";
+  }
+  
+  @RequestMapping(value="/delete", method=RequestMethod.GET)
+  public String deleteForm(@RequestParam("id") Long id){
+    userDao.deleteUser(id);
+    return "redirect:list";
   }
 }
