@@ -16,30 +16,27 @@ public class UserDAOImpl implements UserDAO {
 
 	@PersistenceContext
 	EntityManager em;
-	
-	public User find(Long id){
-		return em.find(User.class,id);
+
+	public User find(Long id) {
+		return em.find(User.class, id);
 	}
 
 	@Transactional
 	public User updateUser(User user) {
 		System.out.println(user.getId());
-		int userUpdate = em.createQuery(
-				"UPDATE User SET firstname = :firstname, lastname = :lastname, password = :password, role = :role, email = :email WHERE id = :id")
-				.setParameter("firstname", user.getFirstname())
-				.setParameter("lastname", user.getLastname())
-				.setParameter("email", user.getEmail())
-				.setParameter("password", user.getPassword())
-				.setParameter("role", user.getRole())
-				.setParameter("id", user.getId())
-				.executeUpdate();
+		int userUpdate = em
+				.createQuery(
+						"UPDATE User SET firstname = :firstname, lastname = :lastname, password = :password, role = :role, email = :email WHERE id = :id")
+				.setParameter("firstname", user.getFirstname()).setParameter("lastname", user.getLastname())
+				.setParameter("email", user.getEmail()).setParameter("password", user.getPassword())
+				.setParameter("role", user.getRole()).setParameter("id", user.getId()).executeUpdate();
 		return userUpdate == 1 ? user : null;
 	}
 
 	@Transactional
 	public boolean deleteUser(Long id) {
 		User user = this.find(id);
-		if(user!=null){
+		if (user != null) {
 			em.remove(user);
 			return true;
 		}
@@ -57,12 +54,13 @@ public class UserDAOImpl implements UserDAO {
 
 		return query.getResultList();
 	}
-  
-  public List<User> retrieveUserByAuth(String email, String password) {
-		TypedQuery<User> query = em.createQuery("SELECT u from User u WHERE email=:email AND password=:password", User.class);
+
+	public List<User> retrieveUserByAuth(String email, String password) {
+		TypedQuery<User> query = em.createQuery("SELECT u from User u WHERE email=:email AND password=:password",
+				User.class);
 
 		query.setParameter("email", email);
-    query.setParameter("password", password);
+		query.setParameter("password", password);
 
 		return query.getResultList();
 	}
@@ -78,12 +76,12 @@ public class UserDAOImpl implements UserDAO {
 
 	@Transactional
 	public User createUser(User user) {
-		if(!em.contains(user)){
+		if (!em.contains(user)) {
 			em.persist(user);
 			em.flush();
-			return user;		
+			return user;
 		} else {
 			return null;
-		}		
+		}
 	}
 }
