@@ -7,7 +7,7 @@
 </head>
 <body>
   <div class="container">
-    <a class="btn btn-lg btn-primary btn-block" href="login">Login</a>
+    <h1>Congratulation you're connected</h1>
   </div>
 </body>
 </html>

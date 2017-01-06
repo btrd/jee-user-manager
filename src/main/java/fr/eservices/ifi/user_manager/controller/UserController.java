@@ -32,8 +32,13 @@ public class UserController {
   private UserServiceImpl userService;
 	
   @RequestMapping(value="/index", method=RequestMethod.GET)
-  public String index(){
-    return "index";
+  public String index(HttpServletRequest req) {
+    User user = userService.getAuthenticatedUser(req);
+    if(user != null) {
+      return "index";
+    } else {
+      return "login";
+    }
   }
 
   @RequestMapping(value="/list", method=RequestMethod.GET)
@@ -48,8 +53,10 @@ public class UserController {
         model.addAttribute("listUser", userDao.listUser());
       }
       return "list";
-    } else {
+    } else if(user != null) {
       return "index";
+    } else {
+      return "login";
     }
   }
 
@@ -64,23 +71,40 @@ public class UserController {
     List<User> retrievedUser = userDao.retrieveUserByAuth(user.getEmail(), user.getPassword());
 
     if(retrievedUser.size() != 1) {
-      // model.addAttribute("error", "Mauvaise connexion");
       return "login";
     }
     Cookie c = new Cookie("user_id", String.valueOf(retrievedUser.get(0).getId()));
     res.addCookie(c);
-    return "index";
+    if(retrievedUser.get(0).getRole().equals("ADMIN")) {
+      return "list";
+    } else {
+      return "index";
+    }
   }
   
   @RequestMapping(value="/register", method=RequestMethod.GET)
-  public String initRegisterPage(Model model) {
-    model.addAttribute("user", new User());
-    return "register";
+  public String initRegisterPage(Model model, HttpServletRequest req) {
+    User user = userService.getAuthenticatedUser(req);
+    if(user != null && user.getRole().equals("ADMIN")) {
+      model.addAttribute("user", new User());
+      return "register";
+    } else if(user != null) {
+      return "index";
+    } else {
+      return "login";
+    }
   }
   
   @RequestMapping(value="/register", method=RequestMethod.POST)
-  public String registerForm(@ModelAttribute User user) {
-    userDao.createUser(user);
-    return "index";
+  public String registerForm(@ModelAttribute User user, HttpServletRequest req) {
+    User user2 = userService.getAuthenticatedUser(req);
+    if(user2 != null && user2.getRole().equals("ADMIN")) {
+      userDao.createUser(user);
+      return "list";
+    } else if(user2 != null) {
+      return "index";
+    } else {
+      return "login";
+    }
   }
 }
