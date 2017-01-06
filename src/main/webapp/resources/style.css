@@ -1,7 +1,7 @@
 body {
   background-color: #eee;
-  background-image: url('../resources/img/login_background.jpeg');
-  background-repeat: no-repeat;
+  background: url('../resources/img/login_background.jpeg') no-repeat center center fixed;
+  background-size: cover;
 }
 
 .form-signin {
