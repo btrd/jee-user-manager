@@ -16,34 +16,21 @@ public class User {
 	String firstname, lastname, email, password;
 	String role;
 
-	// Shijin
 	public User() {
 	}
 
-	// Shijin
 	public User(String email, String password) {
 		this.email = email;
 		this.password = password;
 	}
 
-	// Shijin
-	/*public User(String firstname, String lastname, String email, String password, Role role) {
+	public User(String firstname, String lastname, String email, String password, String role) {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
 		this.password = password;
 		this.role = role;
-	}*/
-	
-	// Shijin
-		public User(String firstname, String lastname, String email, String password, String role) {
-			this.firstname = firstname;
-			this.lastname = lastname;
-			this.email = email;
-			this.password = password;
-			this.role = role;
-		}
-
+	}
 
 	public Long getId() {
 		return id;
@@ -84,16 +71,6 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	/*	
-  	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
-	*/
 	
 	public String getRole() {
 		return role;

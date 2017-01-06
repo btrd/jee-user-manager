@@ -68,5 +68,4 @@ public class UserServiceImpl implements UserService {
   public List<User> listByRole(String role) {
     return dao.listUserByRole(role);
   }
-
 }

@@ -25,11 +25,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 })
 @EnableTransactionManagement
 public class AppConfig {
-  
-  // @Override
-  // public void addResourceHandlers(ResourceHandlerRegistry registry) {
-  //   registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-  // }
 
   @Bean
   public InternalResourceViewResolver getViewResolver() {
@@ -38,14 +33,6 @@ public class AppConfig {
     resolver.setSuffix(".jsp");
     return resolver;
   }
-  
-  // @Bean
-  // public InternalResourceViewResolver jspViewResolver() {
-  //   InternalResourceViewResolver bean = new InternalResourceViewResolver();
-  //   bean.setPrefix("/WEB-INF/views/");
-  //   bean.setSuffix(".jsp");
-  //   return bean;
-  // }
 
   @Bean
   public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
