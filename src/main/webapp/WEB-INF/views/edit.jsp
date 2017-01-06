@@ -7,8 +7,9 @@
   </head>
   <body>
     <div class="container">
-      <form class="form-signin" action="./edit" method="POST">
+      <form class="form-signin" action="./edit" id="user" method="POST">
         <h2 class="form-signin-heading">Register</h2>
+        <input type="hidden" name="id" id="id" value="${user.id}"/>
         <label for="firstname" class="sr-only">Firstname</label>
         <input type="text" id="firstname" class="form-control" placeholder="Firstname" name="firstname" value="${user.firstname}" required autofocus>
         <label for="lastname" class="sr-only">Lastname</label>
