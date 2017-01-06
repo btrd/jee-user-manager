@@ -20,53 +20,49 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({
-  "fr.eservices.ifi.user_manager"
-})
+@ComponentScan({ "fr.eservices.ifi.user_manager" })
 @EnableTransactionManagement
 public class AppConfig {
 
-  @Bean
-  public InternalResourceViewResolver getViewResolver() {
-    InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-    resolver.setPrefix("/WEB-INF/views/");
-    resolver.setSuffix(".jsp");
-    return resolver;
-  }
+	@Bean
+	public InternalResourceViewResolver getViewResolver() {
+		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+		resolver.setPrefix("/WEB-INF/views/");
+		resolver.setSuffix(".jsp");
+		return resolver;
+	}
 
-  @Bean
-  public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-    LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-    em.setDataSource(dataSource());
-    em.setPackagesToScan(new String[] { 
-      "fr.eservices.ifi.user_manager.entity" 
-    });
+	@Bean
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+		em.setDataSource(dataSource());
+		em.setPackagesToScan(new String[] { "fr.eservices.ifi.user_manager.entity" });
 
-    JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-    em.setJpaVendorAdapter(vendorAdapter);
+		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		em.setJpaVendorAdapter(vendorAdapter);
 
-    Properties prop = new Properties();
-    prop.setProperty("hibernate.show_sql", "true");
-    prop.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-    prop.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-    prop.setProperty("javax.persistence.sql-load-script-source", "mock_user.sql");
-    em.setJpaProperties(prop);
+		Properties prop = new Properties();
+		prop.setProperty("hibernate.show_sql", "true");
+		prop.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+		prop.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+		prop.setProperty("javax.persistence.sql-load-script-source", "mock_user.sql");
+		em.setJpaProperties(prop);
 
-    return em;
-  }
+		return em;
+	}
 
-  @Bean
-  public DataSource dataSource() {
-    DriverManagerDataSource dataSource = new DriverManagerDataSource();
-    dataSource.setDriverClassName("org.h2.Driver");
-    dataSource.setUrl("jdbc:h2:./paraDb");
-    return dataSource;
-  }
+	@Bean
+	public DataSource dataSource() {
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setDriverClassName("org.h2.Driver");
+		dataSource.setUrl("jdbc:h2:./paraDb");
+		return dataSource;
+	}
 
-  @Bean
-  public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
-    JpaTransactionManager transactionManager = new JpaTransactionManager();
-    transactionManager.setEntityManagerFactory(emf);
-    return transactionManager;
-  }
+	@Bean
+	public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
+		JpaTransactionManager transactionManager = new JpaTransactionManager();
+		transactionManager.setEntityManagerFactory(emf);
+		return transactionManager;
+	}
 }

@@ -7,19 +7,19 @@ import javax.servlet.http.HttpServletRequest;
 import fr.eservices.ifi.user_manager.entity.User;
 
 public interface UserService {
-  public User getAuthenticatedUser(HttpServletRequest req);
+	public User getAuthenticatedUser(HttpServletRequest req);
 
-  public String getLoginPageUrl();
+	public String getLoginPageUrl();
 
-  public User create(User user);
+	public User create(User user);
 
-  public User update(User user);
-  
-  public boolean delete(Long id);
+	public User update(User user);
 
-  public List<User> list();
+	public boolean delete(Long id);
 
-  public List<User> listByLastName(String lastname);
+	public List<User> list();
 
-  public List<User> listByRole(String role);
+	public List<User> listByLastName(String lastname);
+
+	public List<User> listByRole(String role);
 }
