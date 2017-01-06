@@ -107,4 +107,17 @@ public class UserController {
       return "login";
     }
   }
+  
+  @RequestMapping(value="/edit", method=RequestMethod.GET)
+  public String initUpdateForm(Model model, @RequestParam("id") Long id){
+	model.addAttribute("user",userDao.find(id));
+	return "edit";
+  }
+  
+  @RequestMapping(value="/edit", method=RequestMethod.POST)
+  public String updateForm(@ModelAttribute User user){
+	System.out.println(user.getFirstname());
+    userDao.updateUser(user);
+    return "index";
+  }
 }

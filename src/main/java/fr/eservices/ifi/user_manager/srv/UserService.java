@@ -17,8 +17,10 @@ public interface UserService {
 
   public User create(User user);
   
-  public User update(Long id, String firstname, String lastname, String email, String password, String role);
+  //public User update(Long id, String firstname, String lastname, String email, String password, String role);
 
+  public User update(User user);
+  
   public boolean delete(Long id);
 
   public List<User> list();
