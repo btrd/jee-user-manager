@@ -1,14 +1,14 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <title>Edit</title>
+    <title>Register</title>
     <link href="../../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="../../resources/style.css" rel="stylesheet" type="text/css">
   </head>
   <body>
     <div class="container">
       <form class="form-signin" action="./register" method="POST">
-        <h2 class="form-signin-heading">Edit</h2>
+        <h2 class="form-signin-heading">Register</h2>
         <label for="firstname" class="sr-only">Firstname</label>
         <input type="text" id="firstname" class="form-control" placeholder="Firstname" name="firstname" required autofocus>
         <label for="lastname" class="sr-only">Lastname</label>
